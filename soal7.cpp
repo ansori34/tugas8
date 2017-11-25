@@ -2,40 +2,64 @@
 
 using namespace std;
 
-void generatePrime(int length);
+// Prototypes
+bool checkPrime(int bil);
+int *generatePrime(int length);
 
 int main()
 {
-  int panjang = 0;
+  // Declare variable
+  int length = 0, *listPrime;
+
+  // Save user input into variable
   cout << "Masukkan Panjang Bilangan Prima = ";
-  cin >> panjang;
+  cin >> length;
 
-  generatePrime(panjang);
-}
+  // Call function to get array of prime
+  listPrime = generatePrime(length);
 
-void generatePrime(int length)
-{
-  int batas = 0, bil = 1, prima[length], jumBagi = 0;
-
-  while (batas < length) {
-    jumBagi = 0;
-
-    for (int i = 1; i <= bil; i++) {
-      if (bil % i == 0) {
-        jumBagi++;
-      }
-    }
-
-    if (jumBagi == 2) {
-      prima[batas] = bil;
-      batas++;
-    }
-
-    bil++;
-  }
-
+  // Print list of prime
   cout << "Bilangan Prima = " << endl;
   for (int i = 0; i < length; i++) {
-     cout << prima[i] << endl;
+    cout << listPrime[i] << endl;
   }
+}
+
+// Function to check prime number
+bool checkPrime(int number)
+{
+  int factoredCount = 0;
+
+  for (int i = 1; i <= number; i++) {
+    // If number can factored by index
+    if (number % i == 0) {
+      factoredCount++;
+    }
+  }
+
+  /*
+    If factoredCount is 2, return true
+    Else, return false
+  */
+  return (factoredCount == 2) ? true : false;
+}
+
+// Function to generate list of prime
+int *generatePrime(int length)
+{
+  int limit = 0, number = 1, *prime = new int[length];
+
+  // keep repeating as long as limit not reach length
+  while (limit < length) {
+
+    // If number is prime
+    if (checkPrime(number)) {
+      prime[limit] = number;
+      limit++;
+    }
+
+    number++;
+  }
+
+  return prime;
 }

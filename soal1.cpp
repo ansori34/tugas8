@@ -2,41 +2,48 @@
 
 using namespace std;
 
-int getGreatest(int bil[10], bool status);
+// Prototype
+int getGreatest(int num[10], bool status);
 
 int main()
 {
-  int angka[10];
+  // Declare variable for save user input
+  int number[10];
 
+  // Loop for save user input into array
   for (int i = 0; i < 10; i++) {
-    cin >> angka[i];
+    cin >> number[i];
   }
 
-  cout << "Angka Terkecil = " << getGreatest(angka, false) << endl; // angka terkecil
-  cout << "Angka Terbesar = " << getGreatest(angka, true) << endl; // angka terbesar
+  // Call function to get the smallest number
+  cout << "Angka Terkecil = " << getGreatest(number, false) << endl;
+  // Call function to get the greatest number
+  cout << "Angka Terbesar = " << getGreatest(number, true) << endl;
 }
 
-int getGreatest(int bil[10], bool status)
+// Function to checking list of number and return smallest / greatest value
+// with 2 types of parameters ( integer and boolean )
+int getGreatest(int num[10], bool status)
 {
-  int great, small;
+  // Declare variable with default value
+  int great = num[0], small = num[0];
 
   for (int i = 0; i < 10; i++) {
-    if (i == 0) {
-      great = bil[0];
-      small = bil[0];
+    // Checking if number is the greatest
+    if (num[i] > great) {
+      // Replace the greatest value with greater value
+      great = num[i];
     }
-
-    if (bil[i] > great) {
-      great = bil[i];
-    }
-    else if (bil[i] < small) {
-      small = bil[i];
+    // Checking if number is the smallest
+    else if (num[i] < small) {
+      // Replace the smallest value with smaller value
+      small = num[i];
     }
   }
 
-  if (status) { // status == true
-    return great;
-  } else { // status == false
-    return small;
-  }
+  /*
+    If status is true, return great
+    If status is false, return small
+  */
+  return (status) ? great : small;
 }

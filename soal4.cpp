@@ -2,34 +2,54 @@
 
 using namespace std;
 
-void isiMatrix(int matrix[3][3]);
-void hitungMatrix(int matrix1[3][3], int matrix2[][3]);
+// Prototypes
+int **askMatrix();
+int **calculate(int **matrix1, int **matrix2);
 
 int main()
 {
-  int matrix1[3][3];
-  int matrix2[3][3];
+  // Declare variable to save user input
+  int **matrix1, **matrix2, **value;
 
+  // Call function to save user input into 2d array
   cout << "Input Matrix Pertama = " << endl;
-  isiMatrix(matrix1);
+  matrix1 = askMatrix();
   cout << "Input Matrix Kedua = " << endl;
-  isiMatrix(matrix2);
+  matrix2 = askMatrix();
 
-  hitungMatrix(matrix1, matrix2);
+  // Call function to calculate matrix
+  value = calculate(matrix1, matrix2);
+
+  // Print matrix
+  cout << endl << "Hasil Akhir = " << endl;
+  for (int i = 0; i < 3; i++) {
+    for (int j = 0; j < 3; j++) {
+      cout << value[i][j] << " ";
+    }
+
+    cout << endl;
+  }
 }
 
-void isiMatrix(int matrix[3][3])
+// Function to save user input
+int **askMatrix()
 {
+  int **matrix = new int*[3];
   for (int i = 0; i < 3; i++) {
+    matrix[i] = new int[3];
+
     for (int j = 0; j < 3; j++) {
       cin >> matrix[i][j];
     }
   }
+
+  return matrix;
 }
 
-void hitungMatrix(int matrix1[3][3], int matrix2[][3])
+// Function to calculate matrix
+int **calculate(int **matrix1, int **matrix2)
 {
-  int hasil[3][3];
+  int **hasil = new int*[3];
   int temp;
 
   // hasil[0][0] =
@@ -53,6 +73,7 @@ void hitungMatrix(int matrix1[3][3], int matrix2[][3])
   // + ( matrix1[1][2] * matrix2[2][0] );
 
   for (int i = 0; i < 3; i++) {
+    hasil[i] = new int[3];
     for (int j = 0; j < 3; j++) {
       temp = 0;
       for (int k = 0; k < 3; k++) {
@@ -62,12 +83,5 @@ void hitungMatrix(int matrix1[3][3], int matrix2[][3])
     }
   }
 
-  cout << "Hasil Akhir = " << endl;
-  for (int i = 0; i < 3; i++) {
-    for (int j = 0; j < 3; j++) {
-      cout << hasil[i][j] << " ";
-    }
-
-    cout << endl;
-  }
+  return hasil;
 }

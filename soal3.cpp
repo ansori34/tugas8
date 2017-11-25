@@ -2,34 +2,62 @@
 
 using namespace std;
 
-float getAverage(int length);
+// Prototypes
+int *getFibbo();
+float getAverage(int *fibbo);
+
+// Declare Global Variable
+int length = 0;
 
 int main()
 {
-  int panjang = 0;
-  cout << "Masukkan Panjang Fibbonaci = ";
-  cin >> panjang;
+  // Declare variable to save user input
+  int *fibbo;
 
-  cout << "Rata - Rata = " << getAverage(panjang);
+  // Save user input to global variable
+  cout << "Masukkan Panjang Fibbonaci = ";
+  cin >> length;
+
+  // Call function to get list of Fibbo
+  fibbo = getFibbo();
+
+  // Print list of fibbo
+  for (int i = 0; i < length; i++) {
+    cout << fibbo[i] << " ";
+  }
+
+  // Call function to get average
+  cout << endl << "Rata - Rata = " << getAverage(fibbo);
 }
 
-float getAverage(int length)
+// Function to couting average of fibbo
+float getAverage(int *fibbo)
 {
-  int awal = 0, akhir = 1, fibbo = 0, jumlah = 0;
+  // Declare variable to save count of fibbo
+  float count = 0;
 
-  if (length != 0) {
-    cout << "1 " << endl;
-    jumlah += 1;
+  // Counting
+  for (int i = 0; i < length; i++) {
+    count += fibbo[i];
   }
 
-  for (int i = 1; i < length; i++) {
-    fibbo = awal + akhir;
-    jumlah += fibbo;
-    cout << fibbo << endl;
+  return count / length;
+}
 
-    awal = akhir;
-    akhir = fibbo;
+// Function to generate list of fibbo
+int *getFibbo()
+{
+  // Declare variable to save list of fibbo
+  int *fibbo = new int[length];
+
+  // Generate fibbo
+  for (int i = 0; i < length; i++) {
+    /*
+      If i < 2, fibbo[i] = 1
+      Else, fibbo[i] = fibbo[i-2] + fibbo[i-1]
+    */
+    fibbo[i] = (i < 2) ? 1 : fibbo[i - 2] + fibbo[i - 1];
   }
 
-  return jumlah / length;
+  return fibbo;
 }
